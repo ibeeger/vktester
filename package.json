@@ -1,0 +1,18 @@
+{
+  "name": "vktester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "osx": "electron-packager . 'VKtest工具' --platform=darwin --arch=x64 --icon=icon.icns --out=./dist --asar --app-version=0.1.0 --build-version=1.0 --electron-version=2.0.3",
+    "win": "electron-packager . '分析工具' --platform=win32 --arch=x64 --icon=icon.ico --out=./dist --asar --app-version=0.1.0 -ignore ./tool --build-version=1.0.0 --electron-version=2.0.3 --application-manifest ./tool/appmanifast.xml",
+    "win32": "electron-packager . '分析工具' --platform=win32 --arch=ia32 --icon=icon.ico --out=./dist --asar --app-version=0.1.0 -ignore ./tool --build-version=1.0.0 --electron-version=2.0.3 --application-manifest ./tool/appmanifast.xml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cuixiaohan",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.16.0",
+    "redis": "^2.8.0"
+  }
+}

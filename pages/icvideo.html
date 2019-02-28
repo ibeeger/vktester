@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>互动课堂</title>
+</head>
+<body>
+	<button id="btn">
+		执行
+	</button>
+	<script>
+		console.log('ok')
+		const {
+		dialog
+	} = require('electron').remote;
+	const {
+		ipcRenderer,
+		app,
+		desktopCapturer
+	} = require("electron");
+	   var btn = document.getElementById('btn')
+	   btn.addEventListener('click', function() {
+	   	console.log('okok')
+	   	 ipcRenderer.send('message', {ctrl: 'icvideo'})
+	   }, false)
+	</script>
+</body>
+</html>

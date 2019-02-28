@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'"> -->
+	<title>工具</title>
+	<link rel="stylesheet" href="./assets/style.css">
+	<script src="./scripts/vue.min.js"></script>
+	<script src="./scripts/echarts.min.js"></script>
+</head>
+<body>
+	<ul class="menu" id="app">
+		<li v-for="item in historys"  data-c="{{item.url}}" @click="abc(item)">{{item.name}}</li>
+	</ul>
+	<section class="content" id="content">
+		<h1 v-if="!loaded">欢迎使用 vkTester</h1>
+		<div class="projects" v-else>
+			<div class="ctrl">
+				<select v-model="testtype">
+					<option value="1">根据次数</option>
+					<option value="2">持续时间</option>
+				</select>
+				并发数: <input type="text" v-model="once_num">
+				<label v-if="testtype == 1">执行次数: <input type="text" v-model="total_num"></label>
+				<label v-if="testtype == 2">持续时间: <input type="text" v-model="total_time" placeholder="单位秒"></label>
+				<!-- 开始时间: <input type="time" min="0:00" max="24:00" format="HH:mm" v-model="time"> -->
+				<button @click="begin">开始测试</button>
+				<button @click="download" v-show="isover">下载报告</button>
+			</div>
+			<div v-for="(index,item) in apis" :class="{fitem: true, active: index < curTestIndex, cur: index == curTestIndex}" >
+				<select name="method" @change="abc" v-model="item.method">
+					<option value="GET">GET</option>
+					<option value="POST">POST</option>
+				</select>
+				<input type="text" class="urls" v-model="item.url"> <br>
+				<textarea class="postjson" cols="30" rows="10" v-model="item.reqdata" v-if="item.method == 'POST'" placeholder="请填写请求数据json"></textarea>
+				<div :id="'view'+index" class="charts" v-show="index < curTestIndex"></div>
+			</div>
+		</div>
+	</section>
+<script>
+	require('./module/toTarget.js')
+</script>
+</body>
+</html>
